@@ -17,8 +17,23 @@ h1 {
 }
 main {
     flex: 1;
-    background-color: teal;
+    background-color: #004d4d;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
 
+}
+
+#calculator-body {
+   display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 90%;
+    margin: 50px auto;
+    max-width: 600px;       
+    padding: 1.5rem;        
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 footer {
