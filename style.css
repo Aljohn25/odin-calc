@@ -20,7 +20,7 @@ main {
     background-color: #004d4d;
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
 
 }
 
@@ -34,6 +34,7 @@ main {
     padding: 1.5rem;        
     border: 2px solid black;
     border-radius: 10px;
+    background-color: #2A2A2A;
 }
 
 #screen {
@@ -41,7 +42,48 @@ main {
     height:80px;
     width: 550px;
     margin: 25px auto;
+    background-color: lightgrey;
 
+}
+
+#btn-calc{
+    display: flex;
+    flex-direction: column; 
+    width: 555px;
+    gap: 10px;
+}
+
+.button-first-set,
+.button-second-set,
+.button-third-set,
+.button-fourth-set {
+    display: flex;
+    flex-direction: row;     
+    gap: 10px;     
+              
+}
+
+#btn-calc button {
+    flex: 1;             
+    height: 60px;
+    font-size: 30px;
+}
+
+#btn-last {
+    display: flex;
+    justify-content: space-between;
+    width: 555px;
+    margin-top: 10px;
+    gap: 10px;
+    margin-bottom: 25px;
+    
+}
+
+#btn-last button {
+    flex: 1;             
+    height: 60px;
+    font-size: 30px;
+    
 }
 
 footer {
