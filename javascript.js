@@ -23,6 +23,7 @@ calcContainer.addEventListener('click', (event) => {
 
     let value = target.textContent.trim().toUpperCase();
 
+    
     if (value === 'X') value = '*';
 
     if (!isNaN(value)) {
@@ -49,6 +50,7 @@ function inputDigit(digit) {
         calculator.displayValue = digit;
         calculator.waitingForSecondOperand = false;
     } else {
+        
         calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
     }
 }
@@ -66,10 +68,15 @@ function inputDecimal() {
 }
 
 function handleOperator(nextOperator) {
-    const { firstOperand, displayValue, operator } = calculator;
+    const { firstOperand, displayValue, operator, waitingForSecondOperand } = calculator;
     const inputValue = parseFloat(displayValue);
 
-    if (operator && calculator.waitingForSecondOperand) {
+    if ((nextOperator === '-' || nextOperator === '−') && displayValue === '0' && !waitingForSecondOperand) {
+        calculator.displayValue = '-';
+        return;
+    }
+
+    if (operator && waitingForSecondOperand) {
         calculator.operator = nextOperator === '=' ? null : nextOperator;
         return;
     }
