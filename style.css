@@ -51,6 +51,8 @@ main {
     margin: 25px auto;
     background-color: lightgrey;
     border-radius: 15px;
+    font-size: 40px;
+    text-align: end;
 
 }
 
