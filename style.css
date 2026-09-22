@@ -37,12 +37,20 @@ main {
     background-color: #2A2A2A;
 }
 
+.version {
+    text-align: end;
+    margin: 0;
+    font-weight: 500;
+    color: gray;
+}
+
 #screen {
     display: flex;
     height:80px;
     width: 550px;
     margin: 25px auto;
     background-color: lightgrey;
+    border-radius: 15px;
 
 }
 
@@ -68,7 +76,14 @@ main {
     flex: 1;             
     height: 60px;
     font-size: 30px;
+    border-radius: 10px;
     
+}
+
+#btn-calc button:hover {
+    background-color: grey;
+    color:lightgray;
+    cursor: pointer;
 }
 
 #btn-last {
@@ -79,7 +94,6 @@ main {
     margin-top: 10px;
     gap: 10px;
     margin-bottom: 10px;
-   
     
 }
 
@@ -89,6 +103,7 @@ main {
     font-size: 30px;
     background-color: #4682B4;
     color: #F8F9FA;
+    border-radius: 10px;
     
 }
 
@@ -102,6 +117,11 @@ main {
 .btn-divide, .btn-add, .btn-subtract, .btn-multiply  {
     background-color: orange;
     font-weight: 500;
+}
+
+#btn-calc .btn-divide:hover, #btn-calc .btn-add:hover, #btn-calc .btn-subtract:hover, #btn-calc .btn-multiply:hover  {
+    background-color: goldenrod;
+    color: lightgray;
 }
 
 .btn-subtract {
