@@ -7,7 +7,6 @@ const calculator = {
 
 const performCalculation = {
     '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
-    'x': (firstOperand, secondOperand) => firstOperand * secondOperand,
     '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
     '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
     '−': (firstOperand, secondOperand) => firstOperand - secondOperand,
@@ -15,14 +14,16 @@ const performCalculation = {
     '=': (firstOperand, secondOperand) => secondOperand
 };
 
-const calcContainer = document.querySelector('#btn-calc');
+const calcContainer = document.querySelector('#calculator-body');
 
 calcContainer.addEventListener('click', (event) => {
     const { target } = event;
 
     if (!target.matches('button')) return;
 
-    const value = target.textContent.trim().toUpperCase();
+    let value = target.textContent.trim().toUpperCase();
+
+    if (value === 'X') value = '*';
 
     if (!isNaN(value)) {
         inputDigit(value);
@@ -30,7 +31,7 @@ calcContainer.addEventListener('click', (event) => {
         inputDecimal();
     } else if (value === '=') {
         handleOperator('=');
-    } else if (['/', 'X', '*', '-', '−', '+'].includes(value)) {
+    } else if (['/', '*', '-', '−', '+'].includes(value)) {
         handleOperator(value);
     } else if (value === 'CLEAR' || value === 'RESET' || value === 'AC' || value === 'C') {
         resetCalculator();
@@ -69,7 +70,7 @@ function handleOperator(nextOperator) {
     const inputValue = parseFloat(displayValue);
 
     if (operator && calculator.waitingForSecondOperand) {
-        calculator.operator = nextOperator;
+        calculator.operator = nextOperator === '=' ? null : nextOperator;
         return;
     }
 
@@ -77,13 +78,20 @@ function handleOperator(nextOperator) {
         calculator.firstOperand = inputValue;
     } else if (operator) {
         const result = performCalculation[operator](firstOperand, inputValue);
+        const formattedResult = parseFloat(result.toFixed(7));
         
-        calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
-        calculator.firstOperand = result;
+        calculator.firstOperand = formattedResult;
+        calculator.displayValue = `${formattedResult}`;
     }
 
-    calculator.waitingForSecondOperand = true;
-    calculator.operator = nextOperator;
+    if (nextOperator === '=') {
+        calculator.operator = null;
+        calculator.firstOperand = null;
+        calculator.waitingForSecondOperand = false;
+    } else {
+        calculator.waitingForSecondOperand = true;
+        calculator.operator = nextOperator;
+    }
 }
 
 function resetCalculator() {
@@ -93,28 +101,47 @@ function resetCalculator() {
     calculator.operator = null;
 }
 
-
 function deleteDigit() {
-
-    if (calculator.waitingForSecondOperand) return;
-
-    calculator.displayValue = calculator.displayValue.slice(0, -1);
+    
+    if (calculator.waitingForSecondOperand && calculator.operator !== null) {
+        calculator.operator = null;
+        calculator.displayValue = `${calculator.firstOperand}`;
+        calculator.firstOperand = null;
+        calculator.waitingForSecondOperand = false;
+        return;
+    }
 
     
+    calculator.displayValue = calculator.displayValue.slice(0, -1);
+
     if (calculator.displayValue === '' || calculator.displayValue === '-') {
         calculator.displayValue = '0';
+
+        
+        if (calculator.operator !== null) {
+            calculator.waitingForSecondOperand = true;
+        }
     }
 }
 
 function updateDisplay() {
     const display = document.querySelector('#screen'); 
-    if (display) {
-        
-        if (display.tagName === 'INPUT') {
-            display.value = calculator.displayValue;
+    if (!display) return;
+
+    let outputText = calculator.displayValue;
+
+    if (calculator.firstOperand !== null && calculator.operator) {
+        if (calculator.waitingForSecondOperand) {
+            outputText = `${calculator.firstOperand} ${calculator.operator}`;
         } else {
-            display.textContent = calculator.displayValue;
+            outputText = `${calculator.firstOperand} ${calculator.operator} ${calculator.displayValue}`;
         }
+    }
+
+    if (display.tagName === 'INPUT') {
+        display.value = outputText;
+    } else {
+        display.textContent = outputText;
     }
 }
 
