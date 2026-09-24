@@ -84,6 +84,15 @@ function handleOperator(nextOperator) {
     if (firstOperand === null && !isNaN(inputValue)) {
         calculator.firstOperand = inputValue;
     } else if (operator) {
+
+        if (operator === '/' && inputValue === 0) {
+            calculator.displayValue = 'To Infinity And Beyond';
+            calculator.firstOperand = null;
+            calculator.operator = null;
+            calculator.waitingForSecondOperand = true;
+            return;
+        }
+
         const result = performCalculation[operator](firstOperand, inputValue);
         const formattedResult = parseFloat(result.toFixed(7));
         
@@ -149,6 +158,12 @@ function updateDisplay() {
         display.value = outputText;
     } else {
         display.textContent = outputText;
+    }
+
+    if (outputText === 'To Infinity And Beyond') {
+        display.style.fontSize = '20px'; 
+    } else {
+        display.style.fontSize = ''; 
     }
 }
 
