@@ -29,9 +29,9 @@ main {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    width: 90%;
-    margin: 50px auto;
-    max-width: 600px;       
+    width: 500px;
+    height: 600px;
+    margin: 50px auto;       
     padding: 1.5rem;        
     border: 2px solid black;
     border-radius: 10px;
@@ -48,7 +48,7 @@ main {
 #screen {
     display: flex;
     height:80px;
-    width: 550px;
+    width: 450px;
     margin: 25px auto;
     background-color: lightgrey;
     border-radius: 15px;
@@ -60,7 +60,7 @@ main {
 #btn-calc{
     display: flex;
     flex-direction: column; 
-    width: 555px;
+    width: 450px;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -92,7 +92,7 @@ main {
 #btn-last {
     display: flex;
     justify-content: flex-end;
-    width: 555px;
+    width: 450px;
     height: 60px;
     margin-top: 10px;
     gap: 10px;
@@ -101,9 +101,9 @@ main {
 }
 
 #btn-last button {
-    width: 131.25px;             
+    width: 105px;             
     height: 60px;
-    font-size: 30px;
+    font-size: 25px;
     background-color: #4682B4;
     color: #F8F9FA;
     border-radius: 10px;
