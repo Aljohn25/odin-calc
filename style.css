@@ -29,6 +29,7 @@ main {
     display: flex;
     flex-direction: column; 
     align-items: center;
+    justify-content: space-evenly;
     width: 500px;
     height: 600px;
     margin: 50px auto;       
@@ -41,8 +42,10 @@ main {
 .version {
     text-align: end;
     margin: 0;
+    margin-right: 5px;
     font-weight: 500;
     color: gray;
+    
 }
 
 #screen {
@@ -62,7 +65,7 @@ main {
     flex-direction: column; 
     width: 450px;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .button-first-set,
