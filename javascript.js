@@ -99,7 +99,7 @@ function handleOperator(nextOperator) {
         calculator.firstOperand = formattedResult;
         calculator.displayValue = `${formattedResult}`;
     }
-
+    
     if (nextOperator === '=') {
         calculator.operator = null;
         calculator.firstOperand = null;
@@ -124,6 +124,11 @@ function deleteDigit() {
         calculator.displayValue = `${calculator.firstOperand}`;
         calculator.firstOperand = null;
         calculator.waitingForSecondOperand = false;
+        return;
+    }
+
+    if (calculator.displayValue === 'To Infinity And Beyond') {
+        resetCalculator();
         return;
     }
 
